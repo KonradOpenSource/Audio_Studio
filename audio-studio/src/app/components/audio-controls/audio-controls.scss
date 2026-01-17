@@ -1,0 +1,109 @@
+.audio-controls {
+  .controls-card {
+    .preset-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+
+      .preset-field {
+        flex: 1;
+        min-width: 200px;
+      }
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+
+      .control-item {
+        .control-header {
+          display: flex;
+          align-items: center;
+          margin-bottom: 8px;
+          gap: 8px;
+
+          mat-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+            color: #666;
+          }
+
+          .control-label {
+            flex: 1;
+            font-weight: 500;
+            color: #333;
+          }
+
+          .control-value {
+            min-width: 50px;
+            text-align: right;
+            font-family: monospace;
+            font-size: 14px;
+            color: #666;
+          }
+
+          button[mat-icon-button] {
+            mat-icon {
+              font-size: 16px;
+              width: 16px;
+              height: 16px;
+              color: #999;
+            }
+          }
+        }
+
+        mat-slider {
+          width: 100%;
+
+          ::ng-deep .mat-slider-thumb {
+            transform: scale(1.2);
+          }
+
+          ::ng-deep .mat-slider-track-fill {
+            background-color: #3f51b5;
+          }
+
+          ::ng-deep .mat-slider-thumb-label {
+            background-color: #3f51b5;
+          }
+
+          
+          @media (max-width: 768px) {
+            ::ng-deep .mat-slider-thumb {
+              transform: scale(1.5);
+            }
+          }
+
+          @media (max-width: 480px) {
+            ::ng-deep .mat-slider-thumb {
+              transform: scale(1.8);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .audio-controls {
+    .controls-card {
+      .controls-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .preset-section {
+        flex-direction: column;
+        align-items: stretch;
+
+        .preset-field {
+          min-width: auto;
+        }
+      }
+    }
+  }
+}

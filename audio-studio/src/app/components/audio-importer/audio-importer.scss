@@ -1,0 +1,271 @@
+.audio-importer {
+  .import-container {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .sample-card {
+      flex: 1;
+      max-width: 500px;
+
+      .sample-section {
+        text-align: center;
+
+        .sample-text {
+          margin: 16px 0;
+          color: #666;
+        }
+
+        .sample-list {
+          margin-top: 16px;
+
+          .sample-list-card {
+            max-width: 400px;
+            margin: 0 auto;
+
+            .sample-item {
+              display: flex;
+              align-items: center;
+              padding: 12px 16px;
+              margin: 8px 0;
+              border-radius: 8px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              border: 1px solid #e0e0e0;
+
+              &:hover {
+                background-color: #f5f5f5;
+                border-color: #3f51b5;
+
+                .play-icon {
+                  color: #3f51b5;
+                }
+              }
+
+              &.loading {
+                opacity: 0.6;
+                cursor: not-allowed;
+              }
+
+              mat-icon {
+                margin-right: 12px;
+                color: #666;
+
+                &.play-icon {
+                  margin-left: auto;
+                  margin-right: 0;
+                  transition: color 0.3s ease;
+                }
+              }
+
+              span {
+                flex: 1;
+                font-weight: 500;
+                color: #333;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .import-card {
+      flex: 1;
+      max-width: 500px;
+
+      .file-section {
+        .drop-zone {
+          border: 2px dashed #ccc;
+          border-radius: 8px;
+          padding: 40px 20px;
+          text-align: center;
+          transition: all 0.3s ease;
+          position: relative;
+          min-height: 200px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          &:hover,
+          &.dragging {
+            border-color: #3f51b5;
+            background-color: rgba(63, 81, 181, 0.05);
+          }
+
+          &.dragging {
+            border-color: #ff4081;
+            background-color: rgba(255, 64, 129, 0.05);
+          }
+
+          .upload-icon {
+            font-size: 48px;
+            width: 48px;
+            height: 48px;
+            color: #666;
+            margin-bottom: 16px;
+          }
+
+          .drop-text {
+            margin: 0 0 20px 0;
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+          }
+
+          .supported-formats {
+            margin: 0;
+            font-size: 12px;
+            color: #666;
+          }
+        }
+
+        .file-input-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 20px;
+          gap: 12px;
+
+          .or-text {
+            margin: 0;
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+          }
+
+          .file-input-wrapper {
+            position: relative;
+
+            input[type='file'] {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .loading-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+    p {
+      margin-top: 16px;
+      color: #666;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .audio-importer {
+    .import-container {
+      flex-direction: column;
+      gap: 24px;
+      max-width: 100%;
+      padding: 0 16px;
+
+      .sample-card,
+      .import-card {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .sample-card {
+        .sample-list-card {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .audio-importer {
+    .import-container {
+      gap: 16px;
+      padding: 0 12px;
+
+      .sample-card {
+        .sample-text {
+          font-size: 14px;
+          margin: 12px 0;
+        }
+
+        .sample-list {
+          .sample-list-card {
+            .sample-item {
+              padding: 10px 12px;
+              margin: 6px 0;
+
+              mat-icon {
+                margin-right: 10px;
+                font-size: 20px;
+                width: 20px;
+                height: 20px;
+
+                &.play-icon {
+                  font-size: 18px;
+                  width: 18px;
+                  height: 18px;
+                }
+              }
+
+              span {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+
+      .import-card {
+        .file-section {
+          .drop-zone {
+            padding: 30px 16px;
+            min-height: 160px;
+
+            .upload-icon {
+              font-size: 40px;
+              width: 40px;
+              height: 40px;
+              margin-bottom: 12px;
+            }
+
+            .drop-text {
+              font-size: 14px;
+            }
+
+            .supported-formats {
+              font-size: 11px;
+            }
+          }
+
+          .file-input-section {
+            margin-top: 16px;
+
+            .or-text {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

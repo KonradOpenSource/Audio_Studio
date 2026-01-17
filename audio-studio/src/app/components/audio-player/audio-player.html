@@ -1,0 +1,160 @@
+<div class="audio-player">
+  <mat-card class="player-card">
+    <mat-card-header>
+      <mat-card-title>Audio Player</mat-card-title>
+      <mat-card-subtitle>Playback controls and export</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="player-content" *ngIf="audioLoaded$ | async as audioLoaded">
+       
+        <div class="progress-section">
+          <div class="time-display">
+            <span class="current-time">{{ (currentTime$ | async) || 0 | formatTime }}</span>
+          </div>
+
+          <div class="progress-container">
+            <mat-slider
+              class="time-slider"
+              min="0"
+              [max]="(duration$ | async) || 0"
+              step="0.1"
+              [disabled]="!audioLoaded"
+            >
+              <input
+                matSliderThumb
+                [value]="(currentTime$ | async) || 0"
+                (valueChange)="onTimeChange($event)"
+              />
+            </mat-slider>
+
+            <mat-progress-bar
+              class="progress-bar"
+              mode="determinate"
+              [value]="getProgressPercentage((currentTime$ | async) || 0, (duration$ | async) || 0)"
+            >
+            </mat-progress-bar>
+          </div>
+
+          <div class="time-display">
+            <span class="total-time">{{ (duration$ | async) || 0 | formatTime }}</span>
+          </div>
+        </div>
+
+        
+        <div class="controls-section">
+          <div class="playback-controls">
+            <button
+              mat-stroked-button
+              color="primary"
+              (click)="playPreview()"
+              [disabled]="!audioLoaded || (isPlaying$ | async)"
+            >
+              <mat-icon>play_arrow</mat-icon>
+              Play Preview
+            </button>
+
+            <button
+              mat-stroked-button
+              color="warn"
+              (click)="pause()"
+              [disabled]="!(isPlaying$ | async)"
+            >
+              <mat-icon>pause</mat-icon>
+              Pause
+            </button>
+
+            <button
+              mat-stroked-button
+              color="warn"
+              (click)="stop()"
+              [disabled]="!(isPlaying$ | async)"
+            >
+              <mat-icon>stop</mat-icon>
+              Stop
+            </button>
+
+            <mat-divider [vertical]="true"></mat-divider>
+
+            <button
+              mat-stroked-button
+              color="primary"
+              (click)="playFinalRender()"
+              [disabled]="!exportUrl || (isFinalRenderPlaying$ | async)"
+            >
+              <mat-icon>library_music</mat-icon>
+              Play Final Render
+            </button>
+
+            <button
+              mat-stroked-button
+              color="warn"
+              (click)="pauseFinalRender()"
+              [disabled]="!(isFinalRenderPlaying$ | async)"
+            >
+              <mat-icon>pause</mat-icon>
+              Pause
+            </button>
+
+            <button
+              mat-stroked-button
+              color="warn"
+              (click)="stopFinalRender()"
+              [disabled]="!(isFinalRenderPlaying$ | async)"
+            >
+              <mat-icon>stop</mat-icon>
+              Stop
+            </button>
+          </div>
+
+          
+          <div class="export-controls">
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="exportAudio()"
+              [disabled]="!audioLoaded || isExporting"
+            >
+              <mat-icon>{{ isExporting ? 'hourglass_empty' : 'download' }}</mat-icon>
+              {{ isExporting ? 'Exporting...' : 'Export to WAV and Download' }}
+            </button>
+          </div>
+        </div>
+
+       
+        <div class="export-preview" *ngIf="exportUrl">
+          <mat-divider></mat-divider>
+          <div class="export-preview-content">
+            <mat-icon>library_music</mat-icon>
+            <div class="export-preview-text">
+              <span class="preview-title">Exported Render</span>
+              <span class="preview-subtitle">Listen to the processed WAV</span>
+            </div>
+          </div>
+          <audio #exportAudio class="export-audio" [src]="exportUrl" controls></audio>
+        </div>
+
+        
+        <div class="visualizer-section" *ngIf="audioLoaded">
+          <mat-divider></mat-divider>
+          <app-audio-visualizer></app-audio-visualizer>
+        </div>
+
+       
+        <div class="visualizer-section" *ngIf="exportUrl">
+          <mat-divider></mat-divider>
+          <div class="final-render-visualizer" [hidden]="!(isFinalRenderPlaying$ | async)">
+            <canvas #finalRenderCanvas class="visualizer-canvas full-width"></canvas>
+            <div class="visualizer-label">Final Render Waveform</div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="no-audio" *ngIf="!(audioLoaded$ | async)">
+        <mat-icon class="no-audio-icon">music_note</mat-icon>
+        <p class="no-audio-text">No audio loaded</p>
+        <p class="no-audio-subtitle">Import an audio file to start playing</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

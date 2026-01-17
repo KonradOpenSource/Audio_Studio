@@ -1,0 +1,32 @@
+<div class="app-container">
+ 
+  <mat-toolbar color="primary" class="app-toolbar">
+    <mat-icon class="toolbar-icon">graphic_eq</mat-icon>
+    <span class="toolbar-title">{{ title() }}</span>
+  </mat-toolbar>
+
+  
+  <div class="main-content">
+    <div class="content-wrapper">
+      <mat-tab-group class="studio-tabs">
+        <mat-tab label="Import">
+          <div class="tab-panel">
+            <app-audio-importer></app-audio-importer>
+          </div>
+        </mat-tab>
+        <mat-tab label="Effects">
+          <div class="tab-panel">
+            <app-audio-controls></app-audio-controls>
+          </div>
+        </mat-tab>
+        <mat-tab label="Playback & Export">
+          <div class="tab-panel">
+            <app-audio-player></app-audio-player>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
+
+<router-outlet />

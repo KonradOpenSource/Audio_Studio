@@ -1,0 +1,139 @@
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-toolbar {
+  .toolbar-icon {
+    margin-right: 12px;
+  }
+
+  .toolbar-title {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .toolbar-spacer {
+    flex: 1 1 auto;
+  }
+
+  .toolbar-subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+}
+
+.main-content {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.sidenav-container {
+  height: 100%;
+
+  .sidebar {
+    width: 250px;
+    border-right: 1px solid #e0e0e0;
+
+    .nav-list {
+      padding-top: 16px;
+
+      mat-list-item {
+        height: 48px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.04);
+        }
+
+        &.active {
+          background-color: rgba(63, 81, 181, 0.1);
+          color: #3f51b5;
+
+          mat-icon {
+            color: #3f51b5;
+          }
+        }
+
+        mat-icon {
+          margin-right: 16px;
+          color: #666;
+        }
+      }
+    }
+  }
+
+  .content-area {
+    background-color: #fafafa;
+    overflow-y: auto;
+
+    .content-wrapper {
+      padding: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+
+      .section {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    .main-content {
+      .sidenav-container {
+        .sidebar {
+          width: 200px;
+        }
+
+        .content-area {
+          .content-wrapper {
+            padding: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    .app-toolbar {
+      .toolbar-title {
+        font-size: 16px;
+      }
+
+      .toolbar-subtitle {
+        display: none;
+      }
+    }
+
+    .main-content {
+      .sidenav-container {
+        .sidebar {
+          width: 180px;
+        }
+
+        .content-area {
+          .content-wrapper {
+            padding: 12px;
+          }
+        }
+      }
+    }
+  }
+}

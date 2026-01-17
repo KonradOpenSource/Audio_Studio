@@ -1,0 +1,95 @@
+<div class="audio-importer">
+  <div class="import-container">
+   
+    <mat-card class="sample-card">
+      <mat-card-header>
+        <mat-card-title>Sample Audio</mat-card-title>
+        <mat-card-subtitle>Choose from pre-loaded audio files</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="sample-section">
+          <p class="sample-text">Choose a sample audio file:</p>
+          <button
+            mat-stroked-button
+            color="accent"
+            (click)="toggleSampleList()"
+            [disabled]="isLoading"
+          >
+            <mat-icon>music_note</mat-icon>
+            Load Sample Audio
+          </button>
+
+          <div *ngIf="showSampleList" class="sample-list">
+            <mat-card class="sample-list-card">
+              <mat-card-header>
+                <mat-card-title>Choose a sample</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div
+                  class="sample-item"
+                  *ngFor="let sample of sampleFiles"
+                  (click)="loadSampleAudio(sample)"
+                  [class.loading]="isLoading"
+                >
+                  <mat-icon>audio_file</mat-icon>
+                  <span>{{ sample.name }}</span>
+                  <mat-icon class="play-icon">play_arrow</mat-icon>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+   
+    <mat-card class="import-card">
+      <mat-card-header>
+        <mat-card-title>Import Audio</mat-card-title>
+        <mat-card-subtitle>Load your own audio file</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="file-section">
+          <div
+            class="drop-zone"
+            [class.dragging]="isDragging"
+            (dragover)="onDragOver($event)"
+            (dragleave)="onDragLeave($event)"
+            (drop)="onDrop($event)"
+          >
+            <mat-icon class="upload-icon">cloud_upload</mat-icon>
+            <p class="drop-text">Drag and drop your audio file here</p>
+            <p class="supported-formats">Supported formats: MP3, WAV, WebM, OGG</p>
+          </div>
+
+          <div class="file-input-section">
+            <p class="or-text">or</p>
+            <div class="file-input-wrapper">
+              <button
+                mat-raised-button
+                color="primary"
+                [disabled]="isLoading"
+                (click)="fileInput.click()"
+              >
+                <mat-icon>folder_open</mat-icon>
+                Import Audio
+              </button>
+              <input
+                type="file"
+                #fileInput
+                accept="audio/*,.mp3,.wav,.webm,.ogg"
+                (change)="onFileSelected($event)"
+                [disabled]="isLoading"
+              />
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading audio...</p>
+  </div>
+</div>

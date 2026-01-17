@@ -1,0 +1,230 @@
+<div class="audio-controls">
+  <mat-card class="controls-card">
+    <mat-card-header>
+      <mat-card-title>Audio Controls</mat-card-title>
+      <mat-card-subtitle>Adjust audio parameters in real-time</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+     
+      <div class="preset-section">
+        <mat-form-field appearance="outline" class="preset-field">
+          <mat-label>Preset</mat-label>
+          <mat-select (selectionChange)="onPresetChange($event.value)" [value]="selectedPreset">
+            <mat-option *ngFor="let preset of presets" [value]="preset.name">
+              {{ preset.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button
+          mat-icon-button
+          color="accent"
+          (click)="resetControls()"
+          matTooltip="Reset to default"
+        >
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+
+     
+      <div class="controls-grid" *ngIf="controls$ | async as controls">
+     
+        <div class="control-item">
+          <div class="control-header">
+            <mat-icon>volume_up</mat-icon>
+            <span class="control-label">Volume</span>
+            <span class="control-value">{{ controls.volume | number: '1.1' }}</span>
+            <button mat-icon-button size="small" [matTooltip]="getControlDescription('volume')">
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </div>
+          <mat-slider min="0" max="1" step="0.01">
+            <input
+              matSliderThumb
+              [value]="controls.volume"
+              (valueChange)="onVolumeChange($event)"
+            />
+          </mat-slider>
+        </div>
+
+       
+        <div class="control-item">
+          <div class="control-header">
+            <mat-icon>graphic_eq</mat-icon>
+            <span class="control-label">Bass</span>
+            <span class="control-value">{{ controls.bass | number: '1.1' }}</span>
+            <button mat-icon-button size="small" [matTooltip]="getControlDescription('bass')">
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </div>
+          <mat-slider min="-20" max="20" step="0.1">
+            <input matSliderThumb [value]="controls.bass" (valueChange)="onBassChange($event)" />
+          </mat-slider>
+        </div>
+
+       
+        <div class="control-item">
+          <div class="control-header">
+            <mat-icon>graphic_eq</mat-icon>
+            <span class="control-label">Mid</span>
+            <span class="control-value">{{ controls.mid | number: '1.1' }}</span>
+            <button mat-icon-button size="small" [matTooltip]="getControlDescription('mid')">
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </div>
+          <mat-slider min="-20" max="20" step="0.1">
+            <input matSliderThumb [value]="controls.mid" (valueChange)="onMidChange($event)" />
+          </mat-slider>
+        </div>
+
+       
+        <div class="control-item">
+          <div class="control-header">
+            <mat-icon>graphic_eq</mat-icon>
+            <span class="control-label">Treble</span>
+            <span class="control-value">{{ controls.treble | number: '1.1' }}</span>
+            <button mat-icon-button size="small" [matTooltip]="getControlDescription('treble')">
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </div>
+          <mat-slider min="-20" max="20" step="0.1">
+            <input
+              matSliderThumb
+              [value]="controls.treble"
+              (valueChange)="onTrebleChange($event)"
+            />
+          </mat-slider>
+        </div>
+
+       
+        <div class="control-item">
+          <div class="control-header">
+            <mat-icon>tune</mat-icon>
+            <span class="control-label">Gain</span>
+            <span class="control-value">{{ controls.gain | number: '1.1' }}</span>
+            <button mat-icon-button size="small" [matTooltip]="getControlDescription('gain')">
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </div>
+          <mat-slider min="0.5" max="2" step="0.01">
+            <input matSliderThumb [value]="controls.gain" (valueChange)="onGainChange($event)" />
+          </mat-slider>
+        </div>
+
+  
+        <div class="control-item">
+          <div class="control-header">
+            <mat-icon>waves</mat-icon>
+            <span class="control-label">Reverb</span>
+            <span class="control-value">{{ controls.reverb | number: '1.1' }}</span>
+            <button mat-icon-button size="small" [matTooltip]="getControlDescription('reverb')">
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </div>
+          <mat-slider min="0" max="1" step="0.01">
+            <input
+              matSliderThumb
+              [value]="controls.reverb"
+              (valueChange)="onReverbChange($event)"
+            />
+          </mat-slider>
+        </div>
+
+        
+        <div class="control-item">
+          <div class="control-header">
+            <mat-icon>timer</mat-icon>
+            <span class="control-label">Delay</span>
+            <span class="control-value">{{ controls.delay | number: '1.2' }}</span>
+            <button mat-icon-button size="small" [matTooltip]="getControlDescription('delay')">
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </div>
+          <mat-slider min="0" max="1" step="0.01">
+            <input matSliderThumb [value]="controls.delay" (valueChange)="onDelayChange($event)" />
+          </mat-slider>
+        </div>
+
+        
+        <div class="control-item">
+          <div class="control-header">
+            <mat-icon>repeat</mat-icon>
+            <span class="control-label">Echo Feedback</span>
+            <span class="control-value">{{ controls.echoFeedback | number: '1.2' }}</span>
+            <button
+              mat-icon-button
+              size="small"
+              [matTooltip]="getControlDescription('echoFeedback')"
+            >
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </div>
+          <mat-slider min="0" max="0.95" step="0.01">
+            <input
+              matSliderThumb
+              [value]="controls.echoFeedback"
+              (valueChange)="onEchoFeedbackChange($event)"
+            />
+          </mat-slider>
+        </div>
+
+        
+        <div class="control-item">
+          <div class="control-header">
+            <mat-icon>graphic_eq</mat-icon>
+            <span class="control-label">Distortion</span>
+            <span class="control-value">{{ controls.distortion | number: '1.2' }}</span>
+            <button mat-icon-button size="small" [matTooltip]="getControlDescription('distortion')">
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </div>
+          <mat-slider min="0" max="1" step="0.01">
+            <input
+              matSliderThumb
+              [value]="controls.distortion"
+              (valueChange)="onDistortionChange($event)"
+            />
+          </mat-slider>
+        </div>
+
+       
+        <div class="control-item">
+          <div class="control-header">
+            <mat-icon>speed</mat-icon>
+            <span class="control-label">Playback Rate</span>
+            <span class="control-value">{{ controls.playbackRate | number: '1.2' }}</span>
+            <button
+              mat-icon-button
+              size="small"
+              [matTooltip]="getControlDescription('playbackRate')"
+            >
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </div>
+          <mat-slider min="0.5" max="2" step="0.01">
+            <input
+              matSliderThumb
+              [value]="controls.playbackRate"
+              (valueChange)="onPlaybackRateChange($event)"
+            />
+          </mat-slider>
+        </div>
+
+       
+        <div class="control-item">
+          <div class="control-header">
+            <mat-icon>music_note</mat-icon>
+            <span class="control-label">Pitch Shift</span>
+            <span class="control-value">{{ controls.pitch | number: '1.1' }}</span>
+            <button mat-icon-button size="small" [matTooltip]="getControlDescription('pitch')">
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </div>
+          <mat-slider min="-12" max="12" step="0.1">
+            <input matSliderThumb [value]="controls.pitch" (valueChange)="onPitchChange($event)" />
+          </mat-slider>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
