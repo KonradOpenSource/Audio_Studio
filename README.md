@@ -3,6 +3,19 @@
 Web Audio Studio is a lightweight web application for quick audio editing in your browser, without installing heavy tools like Audacity or Ableton. It allows you to import your own audio files, modify the sound using simple sliders and presets (e.g., Voice Boost, Podcast Clean, TikTok Bass), and export the finished file.
 The application is aimed at web creators, marketers, educators, and hobbyists who need a simple and accessible audio tool. It utilizes the Web Audio API for audio processing and real-time waveform and frequency visualization, combining an intuitive interface with advanced web technology.
 
+💻 Tech Stack:
+
+
+
+Angular_Design is developed using following technologies:
+
+
+
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)   ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white) ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)  ![RxJS](https://img.shields.io/badge/rxjs-%23B7178C.svg?style=for-the-badge&logo=reactivex&logoColor=white) Angular Material
+
+
+Testing:
+
 ## Features
 
 - **Audio Import**: MP3/WAV/WebM/OGG file support
