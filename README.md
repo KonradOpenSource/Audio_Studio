@@ -161,6 +161,6 @@ src/
 
 Requires Web Audio API and Canvas support.
 
-## License
+## 📄 License
 
-MIT
+This project is licensed under the MIT License - see the LICENSE file for details.
