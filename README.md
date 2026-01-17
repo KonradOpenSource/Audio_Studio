@@ -1,6 +1,7 @@
 # Angular Audio Studio
 
-A real-time web audio editing application with DSP effects, waveform visualization, and WAV export. Built with Angular 21, RxJS, Angular Material, and Web Audio API.
+Web Audio Studio is a lightweight web application for quick audio editing in your browser, without installing heavy tools like Audacity or Ableton. It allows you to import your own audio files, modify the sound using simple sliders and presets (e.g., Voice Boost, Podcast Clean, TikTok Bass), and export the finished file.
+The application is aimed at web creators, marketers, educators, and hobbyists who need a simple and accessible audio tool. It utilizes the Web Audio API for audio processing and real-time waveform and frequency visualization, combining an intuitive interface with advanced web technology.
 
 ## Features
 
