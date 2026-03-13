@@ -7,7 +7,6 @@ The application is aimed at web creators, marketers, educators, and hobbyists wh
 
 
 
-Angular_Design is developed using following technologies:
 
 
 
